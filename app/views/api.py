@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, current_app, url_for
+from flask import Blueprint, jsonify, request, current_app, url_for, g
 from urllib.parse import urljoin
 
 api = Blueprint('api', __name__)
@@ -14,7 +14,9 @@ def index():
 
 @api.route('/users')
 def users():
-    return jsonify(Users=['aaa', 'bbb', 'ccc'])
+    cur = g.db.execute('select id, name from users order by id desc')
+    users_dict = [dict(id=row[0], name=row[1]) for row in cur.fetchall()]
+    return jsonify(users=users_dict)
 
 
 @api.route('/records')

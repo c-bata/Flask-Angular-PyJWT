@@ -1,4 +1,5 @@
-from flask import Flask
+import sqlite3
+from flask import Flask, g
 
 
 def create_app():
@@ -7,6 +8,16 @@ def create_app():
 
     from .views.api import api as api_v1_blueprint
     app.register_blueprint(api_v1_blueprint, url_prefix='/api')
+
+    @app.before_request
+    def before_request():
+        g.db = sqlite3.connect(app.config['DATABASE_URI'])
+
+    @app.teardown_request
+    def teardown_request(exception):
+        db = getattr(g, 'db', None)
+        if db is not None:
+            db.close()
 
     @app.errorhandler(404)
     def page_not_found(e):
