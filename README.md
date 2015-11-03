@@ -7,6 +7,10 @@
 - PyJWT
 - AngularJS
 
+## Setup
+
+1. create tables: `$ sqlite3 db.sqlite3 < schema.sql`
+
 
 ## License
 
