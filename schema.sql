@@ -1,7 +1,7 @@
 drop table if exists users;
 create table users (
   id integer primary key autoincrement,
-  name text not null,
+  name text not null unique,
   password_hash text not null
 );
 

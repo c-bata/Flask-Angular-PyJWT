@@ -2,6 +2,7 @@ from flask import (
     Blueprint, jsonify, request, current_app, url_for, g, redirect,
     session, abort
 )
+import sqlite3
 from urllib.parse import urljoin
 from werkzeug.security import generate_password_hash
 
@@ -19,14 +20,21 @@ def index():
 @api.route('/users', methods=['GET', 'POST'])
 def users():
     if request.method == 'POST':
-        g.db.execute(
-            'insert into users (name, password_hash) values (?, ?)',
-            [request.json['name'], generate_password_hash(request.json['password'])]
-        )
-        g.db.commit()
+        try:
+            g.db.execute(
+                'insert into users (name, password_hash) values (?, ?)',
+                [request.json['name'], generate_password_hash(request.json['password'])]
+            )
+            g.db.commit()
+        except sqlite3.IntegrityError:
+            return jsonify({"status": "failed"})
+
+        cur = g.db.execute('select id, name from users where name == ?',
+                           [request.json['name']])
+        user = cur.fetchall()[0]
         return jsonify({
-            "status": "ok",
-            "name": request.json['name']
+            "id": user[0],
+            "name": user[1]
         })
 
     # GET Request

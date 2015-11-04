@@ -10,14 +10,14 @@
 <div class="container">
     <h2>研究時間記録</h2>
     <div ng-controller="AuthenticationController as vm">
-        <form ng-submit="vm.createUser()">
-            <input type="text" ng-model="vm.username" placeholder="ユーザ名">
-            <input type="text" ng-model="vm.password" placeholder="パスワード">
-            <input type="button" class="btn" value="サインアップ">
+        <form novalidate ng-submit="vm.createUser()">
+            <input type="text" ng-model="vm.username" required placeholder="ユーザ名">
+            <input type="text" ng-model="vm.password" required placeholder="パスワード">
+            <input type="submit" class="btn" value="サインアップ">
         </form>
 
         <ul ng-repeat="user in vm.users">
-            <li>[[user.name]]</li>
+            <li>[[user.id]]: [[user.name]]</li>
         </ul>
     </div>
 </div>
@@ -26,3 +26,4 @@
 <script type="text/javascript" src="/static/build/js/bundle.js"></script>
 </body>
 </html>
+
