@@ -20,7 +20,7 @@ def index():
 def users():
     if request.method == 'POST':
         g.db.execute(
-            'insert into users (name, password) values (?, ?)',
+            'insert into users (name, password_hash) values (?, ?)',
             [request.json['name'], generate_password_hash(request.json['password'])]
         )
         g.db.commit()
