@@ -3,6 +3,7 @@ from flask import (
     session, abort
 )
 from urllib.parse import urljoin
+from werkzeug.security import generate_password_hash
 
 api = Blueprint('api', __name__)
 
@@ -18,8 +19,10 @@ def index():
 @api.route('/users', methods=['GET', 'POST'])
 def users():
     if request.method == 'POST':
-        g.db.execute('insert into users (name) values (?)',
-                     [request.json['name']])
+        g.db.execute(
+            'insert into users (name, password) values (?, ?)',
+            [request.json['name'], generate_password_hash(request.json['password'])]
+        )
         g.db.commit()
         return jsonify({
             "status": "ok",
