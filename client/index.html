@@ -1,0 +1,28 @@
+<html ng-app="ResearchRecord">
+<head>
+    <meta lang="ja" charset="UTF-8">
+    <title>研究時間記録</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+
+</head>
+<body>
+<div class="container">
+    <h2>研究時間記録</h2>
+    <div ng-controller="AuthenticationController as vm">
+        <form ng-submit="vm.createUser()">
+            <input type="text" ng-model="vm.username" placeholder="ユーザ名">
+            <input type="text" ng-model="vm.password" placeholder="パスワード">
+            <input type="button" class="btn" value="サインアップ">
+        </form>
+
+        <ul ng-repeat="user in vm.users">
+            <li>[[user.name]]</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Compiled and minified JavaScript -->
+<script type="text/javascript" src="/static/build/js/bundle.js"></script>
+</body>
+</html>

@@ -4,6 +4,8 @@
   "description": "Manage research records",
   "main": "index.js",
   "scripts": {
+    "watch": "gulp watch",
+    "server": "python -m http.server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,8 +20,12 @@
   "homepage": "https://github.com/c-bata/Flask-Angular-PyJWT#readme",
   "devDependencies": {
     "angular": "^1.4.7",
+    "babel": "^6.0.15",
+    "babel-core": "^6.0.20",
+    "babel-preset-es2015": "^6.0.15",
     "browserify": "^12.0.1",
     "gulp": "^3.9.0",
+    "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   }
 }
