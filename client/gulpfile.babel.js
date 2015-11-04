@@ -12,7 +12,7 @@ let paths = {
 };
 
 
-gulp.task('browserify', () => {
+gulp.task('build', () => {
     browserify({entries: [paths.src + "app.js"]})
         .transform(babelify)
         .bundle()
