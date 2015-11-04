@@ -10,5 +10,6 @@ create table research_records (
   day date not null,
   start_time datetime not null,
   end_time datetime not null,
-  detail text
+  detail text,
+  foreign key (id) references users(id)
 );
